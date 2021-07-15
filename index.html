@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>HTML5 Flexible Template</title>
+    <meta name="robots" content="noindex,nofollow" />
+    <style>
+	
+		* {padding:0; margin:0;}
+		html {background-color:rgb(0, 68, 34);}
+		body {
+			font-family: Arial, Helvetica, sans-serif;
+			max-width:960px; /* keeps from getting too large on wide screen */
+			width:90%; /* shrink to fit screen */
+			margin:auto; /* center in html element */
+			background-color:rgb(80, 155, 102);
+			padding:20px;
+			min-height:100%; /* keeps from getting too large on wide screen */
+			}
+		img.flexible {
+			float:right;
+			display:inline-block;
+			padding:20px;
+			max-width:300px; /* actual size of image */
+			width:33%; /* approximate size taken on screen in maximum view */
+		}
+		p {margin:10px;}
+		h1,h2,h3,h4,h5,h6{
+			font-weight:normal;
+			margin:10px;
+			}
+		h1.masthead {margin-top:0;
+			font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif}
+		footer {
+			text-align:center;
+			clear:both; /* ride below all items */
+			}
+		nav{
+			text-align:center; /* centers the nav */
+		}
+		
+		nav ul {
+				list-style:none; /* removes the bullets */
+			}
+		nav ul li
+			{
+				display:inline-block; /* makes horizontal, but able to declare margins */
+				margin:0 2%; /* margin left-right, gets smaller as necessary */
+			}
+		nav a:hover{
+			text-decoration: none;
+		}	
+    </style>
+   
+    <!--[if ltIE9]>
+       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+     <![endif]-->
+</head>
+<body>
+	<header>
+		<h1 class="masthead">Savathûn's Coffee Co.</h1>
+
+	</header>
+    <main>
+	 <header><h3>"If you are here for your average coffee, you are surely misTAKEN."
+		<br><br>
+	A Javascript Example by Bee
+	</h3></header>
+
+	<!--<p>
+		<img src="images/peppermint-mocha.jpg" height="250px" alt="Our Peppermint Mocha tastes great all year round!" class="coffee" />
+		<strong class="feature">Monday's Coffee Special:</strong> Monday's daily coffee special is <strong class="feature">Peppermint Mocha</strong>, 
+		which makes us wish it was always Winter, as this is one of our top sellers!
+	</p>
+-->
+
+	<div id="mydiv"> </div> 
+
+	 <p>This example uses HTML5/CSS and JavaScript to create a single page 
+		 that rotates unique colors and content for each weekday (Sunday to Saturday) 
+		 into the page.</p>
+
+		 <ul>
+			<li>The name of the coffee</li>
+			<li>A picture of the coffee</li>
+			<li>A color associated with the coffee</li>
+			<li>A description of the coffee</li>
+		</ul>
+
+		<h3>Click below to view coffee specials for other days of the week.</h3>
+		
+		<p><a href="?day=1">Monday</a></p>
+		<p><a href="?day=2">Tuesday</a></p>
+		<p><a href="?day=3">Wednesday</a></p>
+		<p><a href="?day=4">Thursday</a></p>
+		<p><a href="?day=5">Friday</a></p>
+		<p><a href="?day=6">Saturday</a></p>
+		<p><a href="?day=7">Sunday</a></p>
+
+     </main>
+    <footer>
+      <small>&copy; 2021, All Rights Reserved ~
+      <a href="https://validator.w3.org/check/referer" target="_blank">Valid HTML</a> ~
+      <a href="https://jigsaw.w3.org/css-validator/check?uri=referer" target="_blank">Valid CSS</a>
+      </small>
+    </footer>
+    <!-- END Footer -->
+
+<script>
+
+	function coffeeTemplate(coffee){
+
+		let myReturn = `
+			<img src="${coffee.pic}" alt="${coffee.alt}" id="coffee" />
+		<strong class="feature">${coffee.day}'s Coffee Special:</strong> 
+		${coffee.day}'s daily coffee special is <strong class="feature">
+		${coffee.name}</strong>, ${coffee.desc}</p>`; 
+
+		return myReturn;
+
+		}
+
+
+	let coffee = "";
+
+	let myDate = new Date ();
+
+	let today = myDate.getDay();
+
+	const queryString = window.location.search;
+	const urlParams = new URLSearchParams(queryString);
+
+	if(urlParams.has('day')){
+		today = urlParams.get('day');
+		today = parseInt(today);
+	}
+
+
+	console.log(today);
+
+	switch(today){
+
+		
+		case 1:
+		
+				coffee = {
+				name: "Caramel Macchiato",
+				pic: "images/Macchiato.jpg",
+				alt: "Caramel Macchiato",
+				color: "tomato",
+				day:"Monday",
+				desc:`Our Salted Caramel is a good way to start your week!`
+			};
+		break;
+
+		case 2:
+		
+				coffee = {
+				name: "Peppermint Mocha",
+				pic: "images/peppermint-mocha.jpg",
+				alt: "Peppermint Mocha",
+				color: "crimson",
+				day:"Tuesday",
+				desc:`Holiday flavor all year round.`
+			};
+		break;
+
+		case 3:
+		
+				coffee = {
+				name: "Loki Dalgona",
+				pic: "images/dalgona.jpg",
+				alt: "Drip Coffee",
+				color: "goldenrod",
+				day:"Wednesday",
+				desc:`This creamy beverage topped with whiipped, concentrated coffee is sure to be the VARIANT you're looking for!`
+			};
+		break;
+
+		case 4:
+		
+			coffee = {
+			name: "Matcha Latte",
+			pic: "images/matcha-latte.jpg",
+			alt: "Drip Coffee",
+			color: "lightgreen",
+			day:"Thursday",
+			desc:`Add some green in your day with our earthy latte made with ground green tea leaves!`
+	};
+		break;
+
+		case 5:
+		
+				coffee = {
+				name: "White Chocolate Mocha",
+				pic: "images/white-mocha.jpg",
+				alt: "Drip Coffee",
+				color: "lemonchiffon",
+				day:"Friday",
+				desc:`This white mocha puts a classic twist on the standard mocha we know you'll love!`
+			};
+		break;
+
+		case 6:
+		
+			coffee = {
+			name: "Drip",
+			pic: "images/drip.jpg",
+			alt: "Drip Coffee",
+			color: "sienna",
+			day:"Saturday",
+			desc:`We've got the drip!`
+			};
+		break;
+
+		case 7:
+		
+			coffee = {
+			name: "Pumpkin Spice Latte",
+			pic: "images/pumpkin-spice.jpg",
+			alt: "Pumpkin Spice Latte",
+			color: "chocolate",
+			day:"Sunday",
+			desc:`It's spooky month! Or at least it feels like it with our Pumpkin Spice!`
+			};
+		break;
+
+	}
+
+	document.getElementById( 'mydiv' ).innerHTML = coffeeTemplate(coffee);
+			document.querySelector('.feature').style.color = coffee.color;
+			document.querySelector('html').style.backgroundColor = coffee.color;
+
+document.getElementById("coffee").style.height = "250px";
+
+</script>
+
+
+</body>
+</html>
